@@ -44,13 +44,30 @@ class EventsManager(models.Manager):
             email = request['email'],
             fbEvent = request['fbEvent'],
             website = request['website'],
-            #image = ''
+            image = request['image']
         )
         E.save()
         return E
 
     def editEvent(self,request):
-        pass
+        '''This function will edit the even info by it self and by calling the
+        editContact function in MobileManager class'''
+        E = Events.objects.get(id = request['id'])
+        E.eventName = request['eventName']
+        E.startDateAndTime = request['startDateAndTime']
+        E.endDateAndTime = request['endDateAndTime']
+        E.description = request['description']
+        E.organisedBy = request['organisedBy']
+        '''contactObjs is only used because editContacts function is returning a list
+        of objects'''
+        contactObjs = Mobile.objects.editContacts(request)
+        E.email = request['email']
+        E.fbEvent = request['fbEvent']
+        E.website = request['website']
+        E.image = request['image']
+
+        E.save()
+        return E
 
     def deleteEvent(self,request):
         E = Events.objects.get(id = request['id'])
@@ -79,7 +96,7 @@ class Events(models.Model):
     #Website
     website = models.CharField(max_length=75, blank=False, null=False)
     #Image
-    image = models.BinaryField(null=True)
+    image = models.URLField(max_length=256, null=True)
 
     objects = EventsManager()
 
@@ -97,25 +114,27 @@ drAdd={
     'endDateAndTime':'2016-04-04 20:04:50.308998',
     'description':'Mid Sems Starting 2016',
     'organisedBy':'DTU',
-    'personalMobile':{'countryCode':91,'mobileNum':9999955533},
-	'alternativeMobile':{'countryCode':91,'mobileNum':9999955533},
+    'personalMobile':{'countryCode':21,'mobileNum':9999955533},
+	'alternativeMobile':{'countryCode':21,'mobileNum':9999955533},
     'email':'example@example.com',
     'fbEvent':'www.facebook.com',
     'website':'www.dtu.ac.in',
-    'image':''
+    'image':'drive.google.co.in/image1'
 }
 
-drEdit={
+drEditEvent={
     'id':'1',
-    'eventName':'Mid Sems 16',
-    'startDateAndTime':'2016-04-04 20:04:50.308998',
-    'endDateAndTime':'2016-04-04 20:04:50.308998',
-    'description':'Mid Sems Starting 2016',
+    'perMobId':'11',
+    'altMobId':'12',
+    'eventName':'Mid Sems 2016',
+    'startDateAndTime':'2016-04-14 20:04:50.308998',
+    'endDateAndTime':'2016-04-24 20:04:50.308998',
+    'description':'Mid Semesters  2016 are starting',
     'organisedBy':'DTU',
-    'personalMobile':{'countryCode':91,'mobileNum':9999955533},
-	'alternativeMobile':{'countryCode':91,'mobileNum':9999955533},
+    'personalMobile':{'countryCode':21,'mobileNum':9999955567},
+	'alternativeMobile':{'countryCode':21,'mobileNum':9999955598},
     'email':'example@example.com',
-    'fbEvent':'www.facebook.com',
+    'fbEvent':'www.facebook.com/myEvent',
     'website':'www.dtu.ac.in',
-    'image':''
+    'image':'drive.google.co.in/image2'
 }
