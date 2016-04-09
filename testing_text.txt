@@ -147,3 +147,11 @@ dpt0 = {
 	'facultyStrength': '20'
 	}
 
+score0 = {
+    'dtuRegId':'DTU/2K12/B08/1501',
+    'courseId':'SE202',
+    'sessMarks':'20',
+    'endMarks':'60',
+    'marksObtained':'80',
+    'creditsGained':'4'
+}

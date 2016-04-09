@@ -4,9 +4,9 @@ from Course.models import Course
 
 class ScoreManager(models.Manager):
     def saveScore(self, request):
-        S =Student.objects.get(request['dtuRegId'])
-        C = Course.objects.get(request['courseId'])
-        S = Score(
+        S =Student.objects.get(dtuRegId = request['dtuRegId'])
+        C = Course.objects.get(courseId = request['courseId'])
+        Sc = Score(
             student = S,
             course = C,
             sessMarks = request['sessMarks'],
@@ -14,15 +14,15 @@ class ScoreManager(models.Manager):
             marksObtained = request['marksObtained'],
             creditsGained = request['creditsGained']
         )
-        S.save()
-        return S
+        Sc.save()
+        return Sc
 
     def getScore(self, request):
-        S =Student.objects.get(request['dtuRegId'])
-        C = Course.objects.get(request['courseId'])
-        S = Score.objects.get(student = S, course = C)
+        S =Student.objects.get(dtuRegId = request['dtuRegId'])
+        C = Course.objects.get(courseId = request['courseId'])
+        Sc = Score.objects.get(student = S, course = C)
         #s = serializers.serialize('json', score)
-        return S
+        return Sc
 
 class Score(models.Model):
 	# Student
@@ -41,4 +41,4 @@ class Score(models.Model):
     objects = ScoreManager()
 
     def __str__(self):
-        return self.course + " : " + str(self.marksObtained)
+        return self.course.courseId + " : " + str(self.marksObtained)
