@@ -14,5 +14,5 @@ class Resource(models.Model):
     resourceId = models.AutoField(primary_key=True, blank=False, null=False)
     type = models.PositiveIntegerField(choices=RESOURCE_TYPE_CHOICES, blank=False, null=False)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default=False)
-    updatedOn = models.DateTimeField(auto_now=True, auto_now_add=True)
+    updatedOn = models.DateTimeField(auto_now=True, auto_now_add=False)
     updatedBy = models.ForeignKey(Faculty, on_delete=models.CASCADE, default=False)
