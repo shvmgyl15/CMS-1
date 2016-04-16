@@ -16,7 +16,15 @@ def addCourse(request):
 
 @csrf_exempt
 @require_GET
-def getCourse(request):
+def retrieveCourses(request):
 	C = Course.objects.retrieveCourses(request.GET)
 	data = serializers.serialize('json', C)
 	return HttpResponse(data, content_type='application/json')
+	
+@csrf_exempt
+@require_GET
+def getCourseById(request):
+	C = Course.objects.getCourseById(request.GET)
+	data = serializers.serialize('json', C)
+	return HttpResponse(data, content_type='application/json')
+	

@@ -5,5 +5,6 @@ from . import views
 
 urlpatterns = [
     url(r'^addCourse', views.addCourse, name='addCourse'),
-    url(r'^getCourse', views.getCourse, name='getCourse'),
+    url(r'^retrieveCourses', views.retrieveCourses, name='retrieveCourses'),
+    url(r'^getCourseById', views.getCourseById, name='getCourseById'),
 ]
