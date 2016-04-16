@@ -27,6 +27,11 @@ class DegreeManager(models.Manager):
 		D.save()
 		return D
 
+	def retrieveDegrees(self,request):
+		"""retrieve all Degrees"""
+		D = Degree.objects.all()
+		return D;
+
 	def getDegreeByCodeAndType(self, request):
 		""" get the degree details using degreeCode and degreeType """
 		D = Degree.objects.get(degreeCode = request['degreeCode'], degreeType = request['degreeType'])

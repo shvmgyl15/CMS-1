@@ -7,4 +7,6 @@ urlpatterns = [
     url(r'^addCourse', views.addCourse, name='addCourse'),
     url(r'^retrieveCourses', views.retrieveCourses, name='retrieveCourses'),
     url(r'^getCourseById', views.getCourseById, name='getCourseById'),
+    url(r'^retrieveDegrees', views.retrieveDegrees, name='retrieveDegrees'),
+    url(r'^getDegreeByCodeAndType', views.getDegreeByCodeAndType, name='getDegreeByCodeAndType'),
 ]
