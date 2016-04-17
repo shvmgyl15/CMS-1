@@ -3,7 +3,7 @@ from django.http import HttpResponse,JsonResponse
 from Course.models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
-
+import json
 
 # input : courseId, courseName, courseType, credits, sessMaxMarks, endMaxSemMarks, maxMarks, minPassingMarks, semester, degreeCode, degreeType, branchCode
 @csrf_exempt
@@ -45,7 +45,17 @@ def retrieveCourses(request):
 @csrf_exempt
 @require_GET
 def getCourseById(request):
-	C = Course.objects.getCourseById(request.GET)
-	data = serializers.serialize('json', C)
-	return HttpResponse(data, content_type='application/json')
+	response_data = {}
+	try:
+		C = Course.objects.getCourseById(request.GET)
+	except Exception as e:
+		response_data["success"] = 0
+	else:
+		response_data["success"] = 1
+		data = serializers.serialize('json', [C, ])
+		response_data["course"] = json.loads(data)
+
+	return JsonResponse(response_data)
+	# data = serializers.serialize('json', [C, ])
+	# return HttpResponse(data, content_type='application/json')
 	
