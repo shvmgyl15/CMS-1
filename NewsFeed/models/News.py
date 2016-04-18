@@ -23,7 +23,7 @@ class NewsManager(models.Manager):
 		return N
 
 	def retrieveLatestNews(self,request):
-		last_ten = News.objects.filter(date = request['since']).order_by('-date')[:10]
+		last_ten = News.objects.filter(date >= request['since']).order_by('-date')[:10]
 		return last_ten
 	
 	def retrieveMoreNews(self, request):
