@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
 import json
 
+#get Branch By COde
 @csrf_exempt
 @require_GET
 def retrieveBranches(request):

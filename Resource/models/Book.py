@@ -15,6 +15,7 @@ class BookManager(models.Manager):
 
         B.save()
         return B
+        
 class Book(models.Model):
     TEXT_BOOK = 0
     REFERENCE_BOOK = 1
