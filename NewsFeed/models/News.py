@@ -1,4 +1,4 @@
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
 from Profiler.models import Faculty
 
@@ -22,14 +22,38 @@ class NewsManager(models.Manager):
 		N = News.objects.get(id = request['id'])
 		return N
 
-	def retrieveProjects(self,request):
-		pass
+	def retrieveLatestNews(self,request):
+		last_ten = News.objects.filter(date = request['since']).order_by('-date')[:10]
+		return last_ten
+	
+	def retrieveMoreNews(self, request):
+		N = News.objects.all()
+		paginator = Paginator(contact_list, request['rowsPerPage']) 
 
-	def deleteProject(self, request):
+		page = request['page']
+		try:
+			news = paginator.page(page)
+		except PageNotAnInteger:
+			# If page is not an integer, deliver first page.
+			news = paginator.page(1)
+		except EmptyPage:
+			# If page is out of range (e.g. 9999), deliver last page of results.
+			news = paginator.page(paginator.num_pages)
+
+		return news
+	
+	def getDetailsById(request):
+		N = News.objects.get(request['id'])
+		return N
+	
+	def deleteNews(self, request):
 		"""deletes news"""
 		N = News.objects.get(request['id'])
 		N = N.delete()
 		return N
+	
+	def editNews(self, request):
+		pass
 
 
 class News(models.Model):

@@ -34,12 +34,13 @@ def retrieveCourses(request):
 		response_data['success'] = '0'
 	else :
 		response_data['success'] = '1'
-		for obj in C:
-			dic = {'courseId' : obj.courseId, 'courseName' :obj.courseName}
-			list.append(dic)
-		response_data['courses'] = list
-	# data = serializers.serialize('json', C)
-	# return HttpResponse(data, content_type='application/json')
+		#for obj in C:
+			#dic = {'courseId' : obj.courseId, 'courseName' :obj.courseName}
+			#list.append(dic)
+		#response_data['courses'] = list
+		data = serializers.serialize('json', C)
+		response_data["courses"] = json.loads(data)
+		
 	return JsonResponse(response_data)
 	
 @csrf_exempt
