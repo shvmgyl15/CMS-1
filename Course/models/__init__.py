@@ -8,3 +8,4 @@ from .Group import *
 from .Course import * 
 from .CourseGroup import *
 #from .CourseSchedule import *
+from .Curriculum import *
