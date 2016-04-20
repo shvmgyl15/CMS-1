@@ -2,13 +2,13 @@ from django.db import models
 from Profiler.models import Student
 from Course.models import *
 
-class CirriculumManager(models.Manager):
-    def retrieveCirriculum(self, request):
+class CurriculumManager(models.Manager):
+    def retrieveCurriculum(self, request):
         C = Course.objects.get(courseId = request['courseId'])
-        objlist  = Cirriculum.objects.filter(course = C)
+        objlist  = Curriculum.objects.filter(course = C)
         return objlist 
 
-class Cirriculum(models.Model):
+class Curriculum(models.Model):
     #Course
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default = False)
     #Unit
@@ -16,7 +16,7 @@ class Cirriculum(models.Model):
     #description
     description = models.TextField()
     
-    objects = CirriculumManager()
+    objects = CurriculumManager()
     
     def __str__(self):
         return str(self.course)

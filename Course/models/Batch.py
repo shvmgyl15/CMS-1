@@ -24,14 +24,17 @@ class BatchManager(models.Manager):
 		B = Batch.objects.get(batchId = request['batchId'])
 		return B
 	
-	def retrieveBatchesByType(self, request):
+	def retrieveBatches(self, request):
 		""" get batches by type """
-		B = Batch.objects.filter(batchType = request["batchType"])
-		
-		idList = []
-		for b in B:
-			nameList.append(b.batchId + "-" + b.batchType)
-		return nameList
+		""" note: type is optional field """
+		B = Batch.objects.all()
+		if 'batchType' in request.keys():
+			B = Batch.objects.filter(batchType=request["batchType"])
+
+		# idList = []
+		# for b in B:
+		#    idList.append(b.batchId + "-" + b.batchType)
+		return B
 	
 class Batch(models.Model):
 	# Batch ID
